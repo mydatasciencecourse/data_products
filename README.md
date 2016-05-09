@@ -1,0 +1,1 @@
+This repository contains the r files for a shiny app with a small game: "Fighting monsters".
