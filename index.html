@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fighting a monster application</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Fighting a monster application">
+  <meta name="author" content="FD">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Fighting a monster application</h1>
+    <h2>A simple game with shiny</h2>
+    <p>FD<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+    <!-- Taken from: http://stackoverflow.com/a/18640582 -->
+
+<!-- Limit image width and height -->
+
+<style type='text/css'>
+img {
+    max-height: 400px;
+    max-width: 800px;
+    margin: 20px;
+}
+</style>
+
+<!-- Center image on slide -->
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+
+<script type='text/javascript'>
+$(function() {
+    $("p:has(img)").addClass('centered');
+});
+</script>
+
+<h2>Fighting a monster: What</h2>
+
+<p><em>Fighting a monster</em> is a simple turn based game implemented in shiny. You select a monster and fight against it by clicking a button.</p>
+
+<p>You see your health and the health of the monster each turn.</p>
+
+<p>The graphs are updated each turn.</p>
+
+<p><img src="assets/img/screenshot.png" alt="jhj"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Fighting a monster: Why</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Fighting a monster is a simple use case for user interaction and dynamic graphs in shiny.</p>
+
+<p>It uses the following features:</p>
+
+<h3>javascript interaction</h3>
+
+<p>Disabling of buttons and select fields</p>
+
+<h3>interactive graphs</h3>
+
+<p>Update of the health status each turn</p>
+
+<h3>user interaction</h3>
+
+<p>User click on button triggers internal logic to update health status</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Fighting a monster: How</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>On button click, a function is called on the server calculating a random number between 1 and 6 (both inclusive) for the player and a random number between the monster strength and 6 (both inclusive) for the monster.</p>
+
+<pre><code class="r">monsters&lt;-data.frame(Nessie=c(1), Alien=c(5), Frogs=c(3))
+randomDiceResultPlayer&lt;-sample(1:6, 1)
+randomDiceResultMonster&lt;-sample(c(monsters[1, &quot;Alien&quot;]:6), 1)
+</code></pre>
+
+<p>The party which has a result of 6 wins the turn. A possible turn would look like:</p>
+
+<pre><code class="r">playerHealth=3
+monsterHealth=3
+monsterHealth&lt;-ifelse(randomDiceResultPlayer==6, monsterHealth-1, monsterHealth)
+playerHealth&lt;-ifelse(randomDiceResultMonster==6, playerHealth-1, playerHealth)
+print(sprintf(&quot;New health player: %d, new health monster: %d&quot;, playerHealth, monsterHealth))
+</code></pre>
+
+<pre><code>## [1] &quot;New health player: 3, new health monster: 3&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Fighting a monster: Where to go next</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Currently: Super simple game design</p>
+
+<p>To enhance game play:</p>
+
+<ul>
+<li>Animation of monsters/Images</li>
+<li>More influence for player decisions:
+
+<ul>
+<li>Trade health against strength</li>
+</ul></li>
+<li>More monsters</li>
+<li>Special abilities of monsters:
+
+<ul>
+<li>Different health</li>
+</ul></li>
+<li>Multiplayer?</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='NA'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Fighting a monster: Why'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Fighting a monster: How'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Fighting a monster: Where to go next'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

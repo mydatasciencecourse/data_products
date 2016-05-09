@@ -1,0 +1,13 @@
+/*Github Ribbon Test*/
+/* Source: https://github.com/dciccale/css3-github-ribbon */
+/* Define classes for example, definition, problem etc. */
+/* Choose meaningful colors for background and text */
+
+img{
+	max-width: 600px;
+	max-height: 300px;
+}
+
+.title-slide {
+	background-color: transparent;
+}
